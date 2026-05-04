@@ -1,52 +1,50 @@
-let options = ["piedra", "papel", "tijera", "salir"];
-let computerChoice = 0;
-let humanChoice = 0;
-let humanScore = 0;
-let computerScore = 0;
-let games = 0;
+    let options = ["piedra", "papel", "tijera"];
+    let humanScore = 0;
+    let computerScore = 0;
+    let games = 0;
 
-while (true && games <= 5)     {
-    humanChoice = getHumanChoice();
-    if (humanChoice == "salir") break;
-    computerChoice = getComputerChoice();
-    checkResults(computerChoice, humanChoice);
-    console.log("Human " + humanScore + " | " + computerScore + " Computer")
-    games++;
-}
-
-function getHumanChoice() {
-    let newChoice;
-    while (true) {
-        newChoice = prompt("Elige piedra, papel o tijera (o salir): ").toLowerCase();
-
-        if (options.includes(newChoice)) break;
-        console.log("Respuesta errónea");
+    while (games < 5)     {
+        let humanChoice = getHumanChoice();
+        let computerChoice = getComputerChoice();
+        checkResults(computerChoice, humanChoice);
+        console.log(`Human ${humanScore} | ${computerScore} Computer`);
     }
-    console.log("El jugador eligió: ",newChoice);
-    return newChoice;
-}
 
-function getComputerChoice() {
-    let newChoice = options[Math.floor(Math.random() * 3)];
-    console.log("La máquina eligió: ", newChoice);
-    return newChoice;
-}
+    function getHumanChoice() {
+        let newChoice;
+        while (true) {
+            newChoice = prompt("Elige piedra, papel o tijera: ").toLowerCase();
 
-function checkResults (computerChoice, humanChoice) {
-    if (computerChoice == humanChoice){
-        console.log("¡Empate!");
-        return 0;
-    } else if (
-        (humanChoice == "piedra" && computerChoice == "tijera") ||
-        (humanChoice == "tijera" && computerChoice == "papel") ||
-        (humanChoice == "papel" && computerChoice == "piedra") 
-        ) {
-            console.log("¡Ganaste!");
-            humanScore++;
-            return 1;
-        } else {
-            console.log("¡Perdiste!");
-            computerScore++;
-            return 0;
+            if (options.includes(newChoice)) break;
+            console.log("Respuesta errónea");
         }
-}
+        console.log("El jugador eligió: ",newChoice);
+        return newChoice;
+    }
+
+    function getComputerChoice() {
+        let newChoice = options[Math.floor(Math.random() * options.length)];
+        console.log("La máquina eligió: ", newChoice);
+        return newChoice;
+    }
+
+    function checkResults (computerChoice, humanChoice) {
+        if (computerChoice === humanChoice){
+            console.log("¡Empate!");
+            return 0;
+        } else if (
+            (humanChoice === "piedra" && computerChoice === "tijera") ||
+            (humanChoice === "tijera" && computerChoice === "papel") ||
+            (humanChoice === "papel" && computerChoice === "piedra") 
+            ) {
+                console.log("¡Ganaste!");
+                humanScore++;
+                games++;
+                return 1;
+            } else {
+                console.log("¡Perdiste!");
+                computerScore++;
+                games++;
+                return 0;
+            }
+    }
