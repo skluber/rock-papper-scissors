@@ -3,13 +3,15 @@ let computerChoice = 0;
 let humanChoice = 0;
 let humanScore = 0;
 let computerScore = 0;
+let games = 0;
 
-while (true)     {
+while (true && games <= 5)     {
     humanChoice = getHumanChoice();
     if (humanChoice == "salir") break;
     computerChoice = getComputerChoice();
     checkResults(computerChoice, humanChoice);
     console.log("Human " + humanScore + " | " + computerScore + " Computer")
+    games++;
 }
 
 function getHumanChoice() {
